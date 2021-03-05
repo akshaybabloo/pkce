@@ -50,6 +50,18 @@ func TestPkce_VerifyCode3(t *testing.T) {
 	}
 }
 
+func TestPkce_VerifyCode4(t *testing.T) {
+	p := Pkce{
+		Length: 42,
+	}
+
+	_, err := p.VerifyCode()
+
+	if assert.Error(t, err) {
+		assert.Equal(t, errors.New("length should be >=43 and <=128"), err)
+	}
+}
+
 func ExamplePkce_VerifyCode() {
 	p := Pkce{
 		RandomString: "ThisIsARandomString",

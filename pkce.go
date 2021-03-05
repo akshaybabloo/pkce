@@ -15,6 +15,7 @@ type Pkce struct {
 	RandomString string
 
 	// Optional Length of the Pkce.VerifyCode. When RandomString is provided, the Length is ignored.
+	// The value should be minimum 43 and maximum 128.
 	Length       int
 }
 
@@ -22,9 +23,15 @@ type Pkce struct {
 // if not, VerifyCode returns a random string based on Pkce.Length.
 func (p *Pkce) VerifyCode() (string, error) {
 	if p.RandomString == "" {
+
 		if p.Length == 0 {
 			return "", errors.New("length should be greater than 0")
 		}
+
+		if p.Length < 43 || p.Length > 128 {
+			return "", errors.New("length should be >=43 and <=128")
+		}
+
 		randomString, err := GenerateRandomString(p.Length)
 		if err != nil {
 			return "", err
