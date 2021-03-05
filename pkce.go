@@ -10,10 +10,10 @@ import (
 
 type Pkce struct {
 
-	// Optional RandomString, this will be converted to Pkce.ChallengeCode
+	// Optional, RandomString, this will be converted to Pkce.ChallengeCode
 	RandomString string
 
-	// Optional Length of the Pkce.VerifyCode. When RandomString is provided, the Length is ignored.
+	// Optional, Length of the Pkce.VerifyCode. When RandomString is provided, the Length is ignored.
 	// The value should be minimum 43 and maximum 128.
 	Length int
 }
@@ -38,6 +38,11 @@ func (p *Pkce) VerifyCode() (string, error) {
 		p.RandomString = randomString
 		return randomString, nil
 	} else {
+
+		if len(p.RandomString) < 43 || len(p.RandomString) > 128 {
+			return "", errors.New("length should be >=43 and <=128")
+		}
+
 		return p.RandomString, nil
 	}
 }

@@ -18,13 +18,13 @@ func TestPkce_ChallengeCode(t *testing.T) {
 
 func TestPkce_VerifyCode(t *testing.T) {
 	p := Pkce{
-		RandomString: "ThisIsARandomString",
+		RandomString: "ThisIsAVeryBiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiigRandomString",
 	}
 
 	code, err := p.VerifyCode()
 
 	if assert.Nil(t, err) {
-		assert.Equal(t, "ThisIsARandomString", code)
+		assert.Equal(t, "ThisIsAVeryBiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiigRandomString", code)
 	}
 }
 
@@ -62,9 +62,21 @@ func TestPkce_VerifyCode4(t *testing.T) {
 	}
 }
 
+func TestPkce_VerifyCode5(t *testing.T) {
+	p := Pkce{
+		RandomString: "ThisIsSmallRandomString",
+	}
+
+	_, err := p.VerifyCode()
+
+	if assert.Error(t, err) {
+		assert.Equal(t, errors.New("length should be >=43 and <=128"), err)
+	}
+}
+
 func ExamplePkce_VerifyCode() {
 	p := Pkce{
-		RandomString: "ThisIsARandomString",
+		RandomString: "ThisIsAVeryBiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiigRandomString",
 	}
 
 	code, err := p.VerifyCode()
@@ -72,7 +84,7 @@ func ExamplePkce_VerifyCode() {
 		panic(err)
 	}
 	fmt.Println(code)
-	// Output: ThisIsARandomString
+	// Output: ThisIsAVeryBiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiigRandomString
 }
 
 func ExamplePkce_VerifyCode_generatedString() {
