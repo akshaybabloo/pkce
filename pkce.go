@@ -8,7 +8,6 @@ import (
 	"errors"
 )
 
-
 type Pkce struct {
 
 	// Optional RandomString, this will be converted to Pkce.ChallengeCode
@@ -16,7 +15,7 @@ type Pkce struct {
 
 	// Optional Length of the Pkce.VerifyCode. When RandomString is provided, the Length is ignored.
 	// The value should be minimum 43 and maximum 128.
-	Length       int
+	Length int
 }
 
 // When Pkce.RandomString is provided, VerifyCode is similar to it
