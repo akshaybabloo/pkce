@@ -13,7 +13,30 @@ func TestPkce_ChallengeCode(t *testing.T) {
 		RandomString: "45d7820e694481f399e7fb9c444f0cb63301a7254d1401443835d9af2c9a6a5ec5b243c3470feb945336025964ef05c8d2f0e44baf76762ba6136914",
 	}
 
-	assert.Equal(t, "iQoF8w9kq5RnuMdisRXypyOoMCF7FGz-ro7dwHjC28U", p.ChallengeCode())
+	code, err := p.ChallengeCode()
+	if assert.Nil(t, err) {
+		assert.Equal(t, "iQoF8w9kq5RnuMdisRXypyOoMCF7FGz-ro7dwHjC28U", code)
+	}
+}
+
+func TestPkce_ChallengeCode2(t *testing.T) {
+	p := Pkce{
+		Length: 50,
+	}
+
+	code, err := p.ChallengeCode()
+	if assert.Nil(t, err) {
+		assert.IsType(t, "", code)
+	}
+}
+
+func TestPkce_ChallengeCode3(t *testing.T) {
+	p := Pkce{}
+
+	_, err := p.ChallengeCode()
+	if assert.Error(t, err) {
+		assert.Equal(t, errors.New("length should be greater than 0"), err)
+	}
 }
 
 func TestPkce_VerifyCode(t *testing.T) {
@@ -103,7 +126,11 @@ func ExamplePkce_ChallengeCode() {
 	p := Pkce{
 		RandomString: "45d7820e694481f399e7fb9c444f0cb63301a7254d1401443835d9af2c9a6a5ec5b243c3470feb945336025964ef05c8d2f0e44baf76762ba6136914",
 	}
-	fmt.Println(p.ChallengeCode())
+	code, err := p.ChallengeCode()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(code)
 	// Output: iQoF8w9kq5RnuMdisRXypyOoMCF7FGz-ro7dwHjC28U
 }
 
@@ -115,5 +142,9 @@ func ExamplePkce_ChallengeCode_generatedString() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(code, p.ChallengeCode())
+	challengeCode, err := p.ChallengeCode()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(code, challengeCode)
 }

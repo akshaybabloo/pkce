@@ -47,8 +47,15 @@ func (p *Pkce) VerifyCode() (string, error) {
 // ChallengeCode returns a challenge code as mentioned in https://tools.ietf.org/html/rfc7636#section-4.2.
 // The code is based on
 // 	code_challenge = BASE64URL-ENCODE(SHA256(ASCII(code_verifier)))
-func (p *Pkce) ChallengeCode() string {
+func (p *Pkce) ChallengeCode() (string, error) {
+	if p.RandomString == "" {
+		code, err := p.VerifyCode()
+		if err != nil {
+			return "", err
+		}
+		p.RandomString = code
+	}
 	hash := sha256.Sum256([]byte(p.RandomString))
 	toBase64 := base64.RawURLEncoding.EncodeToString(hash[:])
-	return toBase64
+	return toBase64, nil
 }

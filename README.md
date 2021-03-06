@@ -56,7 +56,7 @@ func main() {
 		Length: 128,
 	}
 
-	fmt.Println(p.VerifyCode())
+	fmt.Println(p.VerifyCode()) // This is optional
 	// Output: 45d7820e694481f399e7fb9c444f0cb63301a7254d1401443835d9af2c9a6a5ec5b243c3470feb945336025964ef05c8d2f0e44baf76762ba6136914
 	
 	fmt.Println(p.ChallengeCode())
@@ -64,4 +64,4 @@ func main() {
 }
 ```
 
-> Note: You have to call `p.VerifyCode()` before `p.ChallengeCode()` to generate a random string and its hash
+> Note: Calling `p.VerifyCode()` optional, but calling it after `p.ChallengeCode()` will reset `pkce.RandomString`
