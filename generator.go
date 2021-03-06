@@ -10,24 +10,13 @@ import (
 const LETTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~"
 
 // GenerateRandomString returns a random string of a given length
-func GenerateRandomString(l int) (string, error) {
+func GenerateRandomString(l int) string {
 	builder := strings.Builder{}
 	builder.Grow(l)
 
 	for i := 0; i < l; i++ {
-		number, err := generateRandomNumber()
-		if err != nil {
-			return "", err
-		}
-		builder.WriteString(string(LETTERS[number]))
+		n, _ := rand.Int(rand.Reader, big.NewInt(56))
+		builder.WriteString(string(LETTERS[n.Int64()]))
 	}
-	return builder.String(), nil
-}
-
-func generateRandomNumber() (int64, error) {
-	n, err := rand.Int(rand.Reader, big.NewInt(56))
-	if err != nil {
-		return 0, err
-	}
-	return n.Int64(), nil
+	return builder.String()
 }

@@ -31,10 +31,7 @@ func (p *Pkce) VerifyCode() (string, error) {
 			return "", errors.New("length should be >=43 and <=128")
 		}
 
-		randomString, err := GenerateRandomString(p.Length)
-		if err != nil {
-			return "", err
-		}
+		randomString := GenerateRandomString(p.Length)
 		p.RandomString = randomString
 		return randomString, nil
 	} else {

@@ -7,8 +7,6 @@ import (
 )
 
 func TestGenerateRandomString(t *testing.T) {
-	randomString, err := GenerateRandomString(128)
-	if assert.Nil(t, err) {
-		assert.Equal(t, 128, len(randomString))
-	}
+	randomString := GenerateRandomString(128)
+	assert.Equal(t, 128, len(randomString))
 }
