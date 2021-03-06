@@ -1,5 +1,9 @@
 # Proof Key for Code Exchange (PKCE)
 
+[![Go](https://github.com/akshaybabloo/pkce/actions/workflows/go.yml/badge.svg)](https://github.com/akshaybabloo/pkce/actions/workflows/go.yml)
+[![GoDoc](https://godoc.org/github.com/akshaybabloo/pkce?status.svg)](https://pkg.go.dev/github.com/akshaybabloo/pkce)
+[![codecov](https://codecov.io/gh/akshaybabloo/pkce/branch/main/graph/badge.svg?token=71W6D8Z5CX)](https://codecov.io/gh/akshaybabloo/pkce)
+
 Generate PKCE verify and challenge code.
 
 ## Usage
