@@ -1,4 +1,4 @@
-module github.com/akshaybabloo/pkce
+module github.com/akshaybabloo/pkce/v2
 
 go 1.17
 
