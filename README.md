@@ -6,6 +6,12 @@
 
 Generate PKCE verify and challenge code.
 
+## Instillation
+
+```shell
+go get github.com/akshaybabloo/pkce/v2
+```
+
 ## Usage
 
 There are two ways of doing this
@@ -20,7 +26,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/akshaybabloo/pkce"
+	"github.com/akshaybabloo/pkce/v2"
 )
 
 func main() {
@@ -48,7 +54,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/akshaybabloo/pkce"
+	"github.com/akshaybabloo/pkce/v2"
 )
 
 func main() {
